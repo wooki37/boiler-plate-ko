@@ -1,8 +1,8 @@
+// server/index.js
 require('dotenv').config();
 
 const express = require('express')
 const app = express()
-const port = 5000
 const mongoose = require('mongoose')
 const { auth } = require("./middleware/auth")
 const { User } = require("./models/User");
@@ -15,6 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+  console.log('[REQ]', req.method, req.url);
+  next();
+});
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.error(err))
@@ -22,6 +27,8 @@ mongoose.connect(process.env.MONGO_URI)
 app.get('/', (req, res) => {
   res.send('Hello World! 안녕하세요~주현욱입니다!')
 })
+
+app.get('/api/hello', (req, res) => res.send("안녕하세요~ 주현욱입니다! (/api/hello)"));
 
 app.post('/api/users/register', async (req, res) => {
   // 회원 가입 할 때 필요한 정보들을 client에서 가져오면
@@ -98,7 +105,7 @@ app.get('/api/users/logout', auth, async (req, res) => {
 });
 
 
-
+const port = 5000
 app.listen(port, '0.0.0.0', () => {
   console.log(`Example app listening on port ${port}`)
 }) 
