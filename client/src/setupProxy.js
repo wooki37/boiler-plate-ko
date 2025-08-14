@@ -15,7 +15,7 @@ module.exports = function(app) {
       },
       onProxyRes: (proxyRes, req) => {
         console.log('[HPM:onProxyRes]', req.method, req.originalUrl, '->', proxyRes.statusCode);
-      },
+      }, 
     })
   );
 };

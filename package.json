@@ -4,8 +4,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "backend": "nodemon --legacy-watch server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "_backend": "nodemon --legacy-watch server/index.js",
+    "backend": "node ./node_modules/nodemon/bin/nodemon.js server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend --prefix client\""
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
+    "concurrently": "^9.2.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",

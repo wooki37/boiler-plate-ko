@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
   res.send('Hello World! 안녕하세요~주현욱입니다!')
 })
 
-app.get('/api/hello', (req, res) => res.send("안녕하세요~ 주현욱입니다! (/api/hello)"));
+app.get('/api/hello', (req, res) => res.send(""));
 
 app.post('/api/users/register', async (req, res) => {
   // 회원 가입 할 때 필요한 정보들을 client에서 가져오면
